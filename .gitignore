@@ -1,0 +1,51 @@
+# Ignore le répertoire /vendor qui contient les dépendances installées via Composer
+/vendor/
+
+# Ignore le répertoire /var contenant les fichiers temporaires et de cache
+/var/
+
+# Ignore les fichiers de configuration spécifiques à l'environnement
+/.env.local
+/.env.local.php
+/.env.*.local
+.env.local
+.env.local.php
+.env.*.local
+
+# Ignore les fichiers de logs
+/logs/
+*.log
+
+# Ignore les caches de l'outil de génération de code
+/.php_cs.cache
+
+# Ignore les fichiers de build
+/build/
+
+# Ignore les répertoires node_modules et autres fichiers générés par des outils de frontend
+/node_modules/
+/npm-debug.log*
+/yarn-error.log*
+/.pnp/
+/.pnp.js
+
+# Ignore les fichiers et répertoires spécifiques aux IDE et éditeurs
+/.idea
+/.vscode
+*.swp
+*~
+.project
+.pydevproject
+*.tmproj
+.DS_Store
+
+# Ignore les fichiers générés par les systèmes de versionnement
+.svn/
+.hg/
+.git/
+# Ignore les fichiers temporaires générés par le système
+*.bak
+*.tmp
+
+# Ignore les fichiers spécifiques à certains déploiements
+/deploy/
