@@ -1,0 +1,17 @@
+
+{% extends 'admin.html.twig' %}
+
+{% block title %}Éditer un Evenement{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Éditer un Evenement</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin_event') }}" class="btn btn-sm btn-outline-primary mr-1">Retour</a>
+            {{ include('admin/event/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    {{ include('admin/event/_form.html.twig', {'button_label': 'Éditer'}) }}
+
+{% endblock %}

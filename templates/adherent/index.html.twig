@@ -1,0 +1,290 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos Commerces{% endblock %}
+{% block body %}
+
+    <!-- HEADER -->
+    <header class="site-logo">
+        <a href="{{ path('adherents_menu') }}">
+            <svg class="site-logo__icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 447.243 447.243"
+                 xml:space="preserve"><g>
+                    <g>
+                        <path d="M420.361,192.229c-1.83-0.297-3.682-0.434-5.535-0.41H99.305l6.88-3.2c6.725-3.183,12.843-7.515,18.08-12.8l88.48-88.48
+			c11.653-11.124,13.611-29.019,4.64-42.4c-10.441-14.259-30.464-17.355-44.724-6.914c-1.152,0.844-2.247,1.764-3.276,2.754
+			l-160,160C-3.119,213.269-3.13,233.53,9.36,246.034c0.008,0.008,0.017,0.017,0.025,0.025l160,160
+			c12.514,12.479,32.775,12.451,45.255-0.063c0.982-0.985,1.899-2.033,2.745-3.137c8.971-13.381,7.013-31.276-4.64-42.4
+			l-88.32-88.64c-4.695-4.7-10.093-8.641-16-11.68l-9.6-4.32h314.24c16.347,0.607,30.689-10.812,33.76-26.88
+			C449.654,211.494,437.806,195.059,420.361,192.229z"/>
+                    </g>
+                </g></svg>
+            <img src="{{ asset('images/logo.png') }}"/>
+        </a>
+        <h2 class="site-slogan">Le commerce à loisir</h2>
+    </header>
+    <!-- /HEADER -->
+    <div class="container-fluid page-membres">
+        <!-- NAVBAR -->
+        <nav class="members-navbar" role="navigation">
+            <div id="menuToggle">
+                <input id="menuToggleCheckbox" type="checkbox"/>
+
+                <!-- Hamburger Menu -->
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <ul id="menu">
+                    {% set i = 0 %}
+                    {% for adherent in adherents %}
+                        <li tabindex="{{ i }}">
+                            <a class="member-anchor" data-index='{{ adherent.id }}'>
+                                <div class="member-anchor-logo">
+                                    <img class="" src="{{ asset( adherent.logo ) }}" alt=""/>
+                                </div>
+                                <div class="member-anchor-text">
+                                    <strong>{{ adherent.name }}</strong>
+                                </div>
+                            </a>
+                        </li>
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+        <!-- HEADER -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                {% for adherent in adherents %}
+                    <div class="swiper-slide" data-hash={{ adherent.id }}>
+                        <div class="adherent-container">
+                            <main class="adherents-container__main"
+                                  style='background-image: url("{{ asset( adherent.background ) }}");'>
+
+                                <div class="card-adherent">
+                                    <div class="card-adherent__logo">
+                                        <img src="images/{{ asset(adherent.logo) }}" alt="Logo"/>
+                                    </div>
+
+                                    <div class="card-adherent__body pt-3">
+                                        {#
+                                        <div class="card-adherent__title">{{ adherent.name }}</div>
+                                        #}
+                                        <p class="card-adherent__presentation">{{ adherent.presentation }}</p>
+                                        <div class="card-adherent__toolbar">
+                                            {% if adherent.email %}
+                                                <a class="card-adherent__toolbar-btn"
+                                                   href="mailto:{{ adherent.email }}">
+                                                    <svg class="card-adherent__toolbar-icon" x="0px" y="0px"
+                                                         viewBox="0 0 512 512"
+                                                         style="enable-background:new 0 0 512 512;"
+                                                         xml:space="preserve">
+                                                        <g>
+                                                            <g>
+                                                                <polygon
+                                                                        points="339.392,258.624 512,367.744 512,144.896 		"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <polygon
+                                                                        points="0,144.896 0,367.744 172.608,258.624 		"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M480,80H32C16.032,80,3.36,91.904,0.96,107.232L256,275.264l255.04-168.032C508.64,91.904,495.968,80,480,80z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M310.08,277.952l-45.28,29.824c-2.688,1.76-5.728,2.624-8.8,2.624c-3.072,0-6.112-0.864-8.8-2.624l-45.28-29.856
+                L1.024,404.992C3.488,420.192,16.096,432,32,432h448c15.904,0,28.512-11.808,30.976-27.008L310.08,277.952z"/>
+                                                            </g>
+                                                        </g>
+    </svg>
+                                                </a>
+                                            {% endif %}
+                                            {% if adherent.tel %}
+                                                <a class="card-adherent__toolbar-btn" href="tel:{{ adherent.tel }}">
+                                                    <svg class="card-adherent__toolbar-icon"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                         viewBox="0 0 513.64 513.64"
+                                                         style="enable-background:new 0 0 513.64 513.64;"
+                                                         xml:space="preserve">
+                                                        <g>
+                                                            <g>
+                                                                <path d="M499.66,376.96l-71.68-71.68c-25.6-25.6-69.12-15.359-79.36,17.92c-7.68,23.041-33.28,35.841-56.32,30.72
+                                                                    c-51.2-12.8-120.32-79.36-133.12-133.12c-7.68-23.041,7.68-48.641,30.72-56.32c33.28-10.24,43.52-53.76,17.92-79.36l-71.68-71.68
+                                                                    c-20.48-17.92-51.2-17.92-69.12,0l-48.64,48.64c-48.64,51.2,5.12,186.88,125.44,307.2c120.32,120.32,256,176.641,307.2,125.44
+                                                                    l48.64-48.64C517.581,425.6,517.581,394.88,499.66,376.96z"/>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </a>
+                                            {% endif %}
+                                            {% if adherent.url %}
+                                                <a class="card-adherent__toolbar-btn" href="{{ adherent.url }}">
+                                                    <svg class="card-adherent__toolbar-icon"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                         viewBox="0 0 476.16 476.16"
+                                                         style="enable-background:new 0 0 476.16 476.16;"
+                                                         xml:space="preserve">
+                                                        <g>
+                                                            <g>
+                                                                <path d="M260.113,0.256c27.11,39.264,48.236,82.339,62.686,127.812c33.065-5.187,64.911-16.343,93.986-32.922l8.533-5.291
+                                                                    C384.841,38.629,325.127,6.243,260.113,0.256z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M297.813,166.4c-19.83,2.271-39.774,3.411-59.733,3.413c-19.96-0.003-39.903-1.142-59.733-3.413
+                c-4.213,17.945-6.896,36.215-8.021,54.613h135.509C304.71,202.615,302.026,184.345,297.813,166.4z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M238.08,340.48c-16.816,0.015-33.62,0.886-50.347,2.611c12.305,36.743,29.223,71.776,50.347,104.26
+                c21.124-32.484,38.041-67.518,50.347-104.26C271.7,341.366,254.896,340.495,238.08,340.48z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M339.831,255.147c-1.04,20.137-3.763,40.153-8.141,59.836c36.337,6.036,71.283,18.595,103.151,37.069l9.643,6.007
+                c18.303-31.424,29.141-66.634,31.676-102.912H339.831z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M444.484,118.118l-9.643,6.008c-31.862,18.504-66.808,31.091-103.151,37.154c4.372,19.65,7.095,39.63,8.141,59.733H476.16
+                C473.622,184.741,462.785,149.538,444.484,118.118z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M170.325,255.147c1.135,18.4,3.83,36.67,8.055,54.613c39.693-4.534,79.773-4.534,119.467,0
+                c4.202-17.946,6.874-36.216,7.987-54.613H170.325z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M41.318,124.126l-9.643-6.008C13.375,149.538,2.538,184.741,0,221.013h136.329c1.046-20.103,3.769-40.084,8.141-59.733
+                C108.127,155.217,73.18,142.63,41.318,124.126z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M153.361,348.109c-33.062,5.189-64.907,16.338-93.986,32.905l-8.533,5.308c40.474,51.228,100.192,83.61,165.205,89.583
+                C188.933,436.648,167.807,393.579,153.361,348.109z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M238.08,28.826c-21.121,32.48-38.038,67.507-50.347,104.243c16.726,1.734,33.531,2.605,50.347,2.611
+                c16.816-0.006,33.62-0.878,50.347-2.611C276.118,96.333,259.201,61.306,238.08,28.826z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M416.785,381.013c-29.079-16.566-60.924-27.715-93.986-32.905c-14.461,45.473-35.605,88.542-62.737,127.795
+                c65.014-5.973,124.731-38.355,165.205-89.583L416.785,381.013z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M50.893,89.856l8.482,5.291c29.075,16.579,60.921,27.734,93.986,32.922c14.465-45.477,35.609-88.551,62.737-127.812
+                C151.085,6.243,91.371,38.629,50.893,89.856z"/>
+                                                            </g>
+                                                        </g>
+                                                        <g>
+                                                            <g>
+                                                                <path d="M136.329,255.147H0c2.535,36.278,13.372,71.488,31.676,102.912l9.643-6.007c31.868-18.474,66.814-31.032,103.151-37.069
+                C140.091,295.299,137.368,275.284,136.329,255.147z"/>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </a>
+                                            {% endif %}
+                                            {% if adherent.address %}
+                                                <a class="card-adherent__toolbar-btn"
+                                                   href="https://www.google.com/maps/place/{{ adherent.address }} {{ adherent.town }} {{ adherent.zipcode }}"
+                                                   target="_blank">
+                                                    <svg class="card-adherent__toolbar-icon"
+                                                         viewBox="0 0 512 512"
+                                                         style="enable-background:new 0 0 512 512;"
+                                                         xml:space="preserve">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M256,0C161.896,0,85.333,76.563,85.333,170.667c0,28.25,7.063,56.26,20.49,81.104L246.667,506.5
+                                                                c1.875,3.396,5.448,5.5,9.333,5.5s7.458-2.104,9.333-5.5l140.896-254.813c13.375-24.76,20.438-52.771,20.438-81.021
+                                                                C426.667,76.563,350.104,0,256,0z M256,256c-47.052,0-85.333-38.281-85.333-85.333c0-47.052,38.281-85.333,85.333-85.333
+                                                                s85.333,38.281,85.333,85.333C341.333,217.719,303.052,256,256,256z"/>
+                                                        </g>
+                                                    </g>
+                                                    </svg>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-adherent__address">
+                                            {{ adherent.address }} {{ adherent.zipcode }} {{ adherent.town }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="adherent-scroller">
+                                    {# TODO: ICONE FLECHE DE BAS #}
+                                </div>
+                            </main>
+                            <div class="adherents-container__aside">
+                                <div class="adherent-moreinfo">
+                                    <h2 class="adherent-moreinfo__title">
+                                        À propos
+                                    </h2>
+                                    <p class="adherent-moreinfo__desc">
+                                        {# {{ adherent.description|raw }} #}
+                                        {% set foo = adherent.description |split('\r\n') %}
+                                        {% if foo|length >= 1 %}
+                                            {% for item in foo %}
+                                                {{ item|raw }}<br>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{ adherent.description|raw }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if adherent.media|length >= 1 %}
+                                    {% set j = 1 %}
+
+                                    <div class="swiper-container adherent-media-swiper">
+                                        <div class="swiper-wrapper">
+                                            {% for media in adherent.media %}
+                                                <div class="swiper-slide">
+                                                    <img src="{{ asset( media.files ) }}">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="swiper-pagination adherent-media-swiper__pagination"></div>
+                                        {# <div class="swiper-button-prev adherent-media-swiper__prev"></div>
+                                        <div class="swiper-button-next adherent-media-swiper__next"></div> #}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- If we need pagination -->
+            <!-- <div style="color:#FFFFFF" class="swiper-pagination"></div> -->
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev cards-swiper-prev"></div>
+            <div class="swiper-button-next cards-swiper-next"></div>
+
+        </div>
+    </div>
+{% endblock %}

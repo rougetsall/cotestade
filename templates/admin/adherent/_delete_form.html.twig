@@ -1,0 +1,5 @@
+<form class="mb-0 ml-1" method="post" action="{{ path('adherent_delete', {'id': adherent.id}) }}" onsubmit="return confirm('Souhaitez-vous vraiment supprimer cet adhérent ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ adherent.id) }}">
+    <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+</form>

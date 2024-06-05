@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css">
+    <title>{{ titrecom }}</title>
+</head>
+<body>
+
+    <div>
+
+        <div class="container-page">
+            <div class="container-title">
+                <h1 class="title-page">{{ titrecom }}</h1>
+                <a id="retour" href="{{ path('home') }}">
+                <span class="arrow">&lt;</span>
+                </a>
+            </div>
+    
+            <div id="slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                       
+                       
+                            {% for shop in shops %}
+                             <li class="splide__slide">
+                                    <div id="card-2" class="card">
+                                        <div>
+                                        <a href="{{ path('adherent_show', {'id': shop.id}) }}" class="shop-card__thumbnail">
+                                                
+                                                <img  class="image-css" src="{{ asset( 'images/' ~  shop.media ) }}" alt="Logo"/>
+                                               
+                                            </a>
+                                            {# <img class="image-css" src="image/background.png" alt=""> #}
+                                        </div>
+                                        <div class="container-info">
+                                            <h2 class="subtitle-photo">{{ shop.title }}</h2>
+                                            <div class="bottom-photo">
+                                               <a href="#" class="photo-button">
+                                                   <img src="{{ asset( 'icons/calendar-07.svg' ) }}" style="margin-top: 2px;">
+                                                    <span> {{ shop.date|date('m/d/Y') }}<br>   </span>
+                                                </a>
+                                                <a href="http://www.google.com/maps?q={{ shop.address  }}" class="photo-button">
+                                                    <img src="{{ asset( 'icons/ping.svg' ) }}">
+                                                    <span>{{ shop.address }}</span>
+                                                </a>
+                                                
+                                                <a href="{{ path('adherent_show', {id: shop.adherent.id}) }}" target="_blank" class="photo-button">
+                                                   <img src="{{ asset( 'icons/user-profile-03.svg' ) }}" style="margin-top: 2px;">
+                                                    <span>{{ shop.adherent }}<br/></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                     <div id="card-3" class="card">
+                                        
+                                            <button class="main-button"> <a href="{{ shop.adherent.url }}"  >Réserver</a></button>
+                                        
+
+                                        </div>
+                                </li>
+                            {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-buttons">
+                <div class="center-buttons-resa">
+                    <button class="resa-button">Réserver</button>
+                </div>
+            </div>
+            
+            
+    
+           <div class="container-nav">
+                <nav class="bottom-nav">
+                    <a href="{{ path('shops') }}" class="nav-button">
+                        <img  src="{{ asset( 'icons/commerces.svg' ) }}">
+                        <span style="color: #999;" >Commerces</span>
+                    </a>
+                    <a href="{{ path('events_to_bonplan') }}" class="nav-button">
+                        
+                        <img src="{{ asset( 'icons/bons-plans.svg' ) }}">
+                        <span style="color: #999;">Bons plans</span>
+                    </a>
+                    <a href="{{ path('events_to_come') }}" class="nav-button">
+                        <img src="{{ asset( 'icons/calendar.svg' ) }}">
+                        <span >Événements</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Empêche le scroll */
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ededed;
+        }
+
+        .subtitle-photo{
+            margin: auto;
+        }
+
+        .container-page{
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            margin: 0px 15px;
+        }
+
+        .container-info{
+            background-color: #fff;
+            border-bottom-left-radius: 30px; /* Ajustez la valeur selon vos besoins */
+            border-bottom-right-radius: 30px;
+        }
+
+        .splide__slide {
+            padding: 0 4px;
+        }
+
+        .card{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            height: 100%;
+            width: 80vw;
+            padding: 10px; /* Ajout de padding */
+        }
+        
+        .title-text{
+            font-weight: 600;
+            font-size: 8vw;
+            width: 90%;
+            display: flex;
+            margin: auto;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+            padding: 10px 0;
+            margin-bottom: 10px; /* Espace en bas de la page */
+            border-radius: 35px;
+        }
+        
+        .nav-button {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            font-size: 3.5vw;
+        }
+        
+        .nav-button img {
+            width: 24px; /* Taille des icônes */
+            height: 24px;
+            margin: auto;
+            margin-bottom: 2px;
+        }
+
+        .bottom-photo {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: black;
+            margin-bottom: 10px; /* Espace en bas de la page */
+            border-radius: 35px;
+        }
+
+        .photo-button {
+            flex: 1;
+            text-align: center;
+            justify-content: end;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            font-size: 3.5vw;
+            color: black;
+        }
+        
+        .photo-button img {
+            width: 24px; /* Taille des icônes */
+            height: 24px;
+            margin: auto;
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: end;
+        }
+
+        .subtitle-photo{
+            font-size: 5vw;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+        .image-css{
+            margin: auto;
+            display: flex;
+            width: 100%;
+        }
+        
+        a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .container-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            padding: 20px 0px;
+        }
+        
+        .title-page {
+            flex: 1;
+            text-align: center;
+            font-size: 7vw;
+        }
+        
+        .arrow {
+            position: absolute;
+            left: 10%; /* Ajustez la valeur pour positionner le span à droite */
+        }
+
+        /* Custom CSS for Splide */
+        .splide__track {
+            padding: 0 20px;
+            overflow: visible;
+        }
+
+        .splide__list {
+            display: flex;
+        }
+
+        .splide__slide {
+            flex: 0 0 50%; /* Ajusté pour montrer moins des cartes voisines */
+            transition: transform 0.5s;
+        }
+
+        .splide__arrows {
+            display: none;
+        }
+
+        /* Cacher les points d'indication de position */
+        .splide__pagination {
+            display: none;
+        }
+
+        .center-buttons-resa {
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-buttons{
+            display: flex;
+            justify-content: center;
+        }
+        .resa-button {
+            flex: 1;
+            padding: 10px 40px;
+            text-align: center;
+            background-color: #b3a0ff7f;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 4vw;
+        }
+
+        .container-nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            margin: 0px 15px;
+           
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#slider', {
+                type      : 'loop',
+                perPage   : 1,
+                focus     : 'center',
+                autoplay  : false,
+                gap       : '', // Espace entre les slides
+                padding   : '0%', // Augmenté pour plus de décalage
+            }).mount();
+        });
+    </script>
+    
+    <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script>
+</body>
+</html>

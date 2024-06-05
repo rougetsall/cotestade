@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css">
+    <title>{{ titrecom }}</title>
+</head>
+<body>
+
+    <div>
+
+        <div class="container-page">
+            <div class="container-title">
+                <h1 class="title-page">{{ titrecom }}</h1>
+                <a id="retour" href="{{ path('home') }}">
+                <span class="arrow">&lt;</span>
+                </a>
+            </div>
+    
+            <div id="slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                       
+                       
+                            {% for shop in shops %}
+                             <li class="splide__slide">
+                                    <div id="card-2" class="card">
+                                        <div>
+                                        <a href="{{ path('adherent_show', {'id': shop.id}) }}" class="shop-card__thumbnail">
+                                                {% if shop.imagemobile != null %}
+                                                  <img  class="image-css" src="{{ asset( 'images/' ~ shop.imagemobile ) }}" alt="Logo"/>
+                                                {% else %}
+                                                <img  class="image-css" src="{{ asset( 'images/' ~ shop.background ) }}" alt="Logo"/>
+                                                {% endif %}
+                                            </a>
+                                            {# <img class="image-css" src="image/background.png" alt=""> #}
+                                        </div>
+                                        <div>
+                                            <h2 class="subtitle-photo">{{ shop.name }}</h2>
+                                            <div class="bottom-photo">
+                                                <a href="tel:{{ shop.tel|replace({' ': ''}) }}" class="photo-button">
+                                                    <img src="{{ asset( 'icons/phone.svg' ) }}" >
+                                                    <span>Appeler</span>
+                                                </a>
+                                                <a href="http://www.google.com/maps?q={{ shop.address }}" class="photo-button">
+                                                    <img src="{{ asset( 'icons/ping.svg' ) }}">
+                                                    <span>S'y rendre</span>
+                                                </a>
+                                                <a href="{{ shop.url }}" target="_blank" class="photo-button">
+                                                    <img src="{{ asset( 'icons/web.svg' ) }}" >
+                                                    <span>Site web</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+            
+    
+           <div class="container" style="flex-direction: column-reverse;">
+                <nav class="bottom-nav">
+                    <a href="{{ path('shops') }}" class="nav-button">
+                        <img  src="{{ asset( 'icons/commerces.svg' ) }}">
+                        <span>Commerces</span>
+                    </a>
+                    <a href="{{ path('events_to_bonplan') }}" class="nav-button">
+                        
+                        <img src="{{ asset( 'icons/bons-plans.svg' ) }}">
+                        <span style="color: #999;">Bons plans</span>
+                    </a>
+                    <a href="{{ path('events_to_come') }}" class="nav-button">
+                        <img src="{{ asset( 'icons/calendar.svg' ) }}">
+                        <span style="color: #999;">Événements</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            /* overflow: hidden; Empêche le scroll */
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ededed;
+        }
+        .photo-button >span {
+            font-family: 'Inter';font-size: 13px;
+        }
+        .title-page,.arrow{
+            font-family: 'Inter';font-size: 20px;
+        }
+        .subtitle-photo{
+            margin: auto;
+            font-family: 'Inter';font-size: 16px;
+        }
+        .container-page{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            margin: 0 15px;
+            padding-bottom: 56px;           
+        }
+        #retour{ 
+            color:#000;
+        }
+        .card{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            margin: 0px 15px;
+            background-color: #ffffff;
+            border-radius: 50px;
+            width: 80%;
+            margin: auto;
+        }
+        
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .title-text{
+            font-weight: 600;
+            font-size: 8vw;
+            width: 90%;
+            display: flex;
+            margin: auto;
+        }
+        .splide__arrow--next,.splide__arrow--prev{
+            display:none;
+        }
+        .center-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-direction: column;
+            width: 90%;
+        }
+        
+        .main-button {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background-color: #B3A0FF;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 5vw;
+            width: 100%;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+            padding: 10px 0;
+            margin-bottom: 10px; /* Espace en bas de la page */
+            border-radius: 35px;
+        }
+        
+        .nav-button {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            font-size: 3.5vw;
+        }
+        
+        .nav-button img {
+            width: 24px; /* Taille des icônes */
+            height: 24px;
+            margin: auto;
+            margin-bottom: 2px;
+        }
+
+        .bottom-photo {
+            display: flex;
+            justify-content: space-between;
+            color: black;
+            padding: 10px 0;
+            margin-bottom: 10px; /* Espace en bas de la page */
+            border-radius: 35px;
+        }
+
+        .photo-button {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            font-size: 3.5vw;
+            color: black;
+        }
+        
+        .photo-button img {
+            width: 24px; /* Taille des icônes */
+            height: 24px;
+            margin: auto;
+            margin-bottom: 2px;
+        }
+
+        .subtitle-photo{
+            font-size: 16px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0px;
+        }
+
+        .image-css{
+            margin: auto;
+            display: flex;
+            width: 100%;
+            border-radius: 25px 25px 0 0;
+        }
+        
+        a{
+        text-decoration: none;
+        color: white;
+        }
+
+
+        .container-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            padding: 40px 0px;
+        }
+        .is_active{
+            width: calc(90%) !important;
+            padding-left:15px;
+            padding-right:15px;
+        }
+        
+        .title-page{
+
+        } {
+            flex: 1;
+            text-align: center;
+            font-size: 7vw;
+        }
+        
+        .arrow {
+            position: absolute;
+            left: 4%; /* Ajustez la valeur pour positionner le span à droite */
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#slider', {
+                type   : 'loop',
+                perPage: 1,
+                autoplay: true,
+                interval: 3000,
+            }).mount();
+        });
+    </script>
+    
+    <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{{ form_start(form) }} 
+   <div class="form-group">
+        {{ form_row(form.title) }}
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="form-group">
+       <div class="form-group">
+        {{ form_row(form.adherent) }}
+    </div>
+     {% endif %}
+     
+      <div class="form-group">
+        {{ form_row(form.filelogo) }}
+    </div>
+   <div class="form-group">
+        {{ form_row(form.address) }}
+    </div>
+      <div class="form-group">
+        {{ form_row(form.date) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.description) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_row(form.file) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.socialmeida) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.category) }}
+    </div>
+     {% if is_granted('ROLE_ADMIN') %}
+    <div class="form-group">
+        {{ form_row(form.status) }}
+    </div>
+     {% endif %}
+    <button class="btn btn-sm btn-outline-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

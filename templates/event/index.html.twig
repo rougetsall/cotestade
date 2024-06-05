@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+
+    <div class="evenements container-fluid ">
+
+        <div class="container-fluid">
+            <!-- HEADER -->
+            <header class="site-logo">
+                <a href="{{ path('home') }}">
+                    <svg class="site-logo__icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 447.243 447.243" xml:space="preserve"><g><g><path d="M420.361,192.229c-1.83-0.297-3.682-0.434-5.535-0.41H99.305l6.88-3.2c6.725-3.183,12.843-7.515,18.08-12.8l88.48-88.48
+			c11.653-11.124,13.611-29.019,4.64-42.4c-10.441-14.259-30.464-17.355-44.724-6.914c-1.152,0.844-2.247,1.764-3.276,2.754
+			l-160,160C-3.119,213.269-3.13,233.53,9.36,246.034c0.008,0.008,0.017,0.017,0.025,0.025l160,160
+			c12.514,12.479,32.775,12.451,45.255-0.063c0.982-0.985,1.899-2.033,2.745-3.137c8.971-13.381,7.013-31.276-4.64-42.4
+			l-88.32-88.64c-4.695-4.7-10.093-8.641-16-11.68l-9.6-4.32h314.24c16.347,0.607,30.689-10.812,33.76-26.88
+			C449.654,211.494,437.806,195.059,420.361,192.229z"/></g></g></svg>
+                    <img src="{{ asset('images/logo.png') }}"/>
+                </a>
+                <h2 class="site-slogan">Le commerce à loisir</h2>
+            </header>
+            <!-- /HEADER -->
+
+            <!-- Slider main container -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+
+                    {# {% for event in events %}
+                    <div class="swiper-slide pb-5">
+                        
+                        <div class="card card-event">
+                            <img class="card-img-top" src="/images/{{ asset( event.media ) }}" alt="Card Image"/>
+                            {% if event.logo %} 
+                                <img class="card-img-top" src="/images/{{ asset( event.logo ) }}" alt="Card Image"/>
+                            {% endif %}
+                            <div class="card-body">
+                                <div class="card-date">{{ event.date|date("d/m/Y") }}</div>
+                                    <h4 class="card-title">{{ event.title }}</h4>
+                                    <p class="card-description">{{ event.description}}</p>
+                                    {% if event.socialmeida %} 
+                                        <a href="{{ event.socialmeida }}" class="card-link">{{ event.socialmeida }}</a>
+                                    {% endif %}
+                                </div>
+                                
+                            </div> <!-- END CARD -->
+                        </div> <!-- END SLIDE -->
+               {% endfor %} #}
+                    {% for event in events %}
+                        <div class="swiper-slide" data-hash={{ event.id }}>
+                            <div class="adherent-container">
+
+                                <main class="adherents-container__main events-container__main">
+                                    <div class="card-adherent">
+                                        <div class="card-adherent__featured">
+                                            <img src="{{ asset( event.media ) }}" alt="Logo"/>
+                                        </div>
+
+                                        <div class="card-adherent__body">
+                                            <div class="card-adherent__title mt-5">{{ event.title }}</div>
+                                            <p class="card-adherent__presentation">
+                                             {% set foo = event.description |split('\r\n') %}
+                                                {% if foo|length >= 1 %}
+                                                {% for item in foo %}
+                                                        {{ item|raw }}<br>
+                                                    {% endfor %}
+                                                {% else %}
+                                                {{ event.description|raw }}
+                                                {% endif %}
+                                            </p>
+                                            <div class="card-adherent__toolbar">
+                                               {% if event.socialmeida %}
+                                                    <a href="{{ event.socialmeida }}" class="card-adherent__social-link">
+                                                        <svg class="card-adherent__toolbar-icon mr-1" height="512pt" viewBox="-21 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 85.332031c0 38.292969-31.039062 69.335938-69.332031 69.335938s-69.332031-31.042969-69.332031-69.335938c0-38.289062 31.039062-69.332031 69.332031-69.332031s69.332031 31.042969 69.332031 69.332031zm0 0"/><path  d="m384 170.667969c-47.0625 0-85.332031-38.273438-85.332031-85.335938 0-47.058593 38.269531-85.332031 85.332031-85.332031s85.332031 38.273438 85.332031 85.332031c0 47.0625-38.269531 85.335938-85.332031 85.335938zm0-138.667969c-29.417969 0-53.332031 23.9375-53.332031 53.332031 0 29.398438 23.914062 53.335938 53.332031 53.335938s53.332031-23.9375 53.332031-53.335938c0-29.394531-23.914062-53.332031-53.332031-53.332031zm0 0"/><path  d="m453.332031 426.667969c0 38.289062-31.039062 69.332031-69.332031 69.332031s-69.332031-31.042969-69.332031-69.332031c0-38.292969 31.039062-69.335938 69.332031-69.335938s69.332031 31.042969 69.332031 69.335938zm0 0"/><path  d="m384 512c-47.0625 0-85.332031-38.273438-85.332031-85.332031 0-47.0625 38.269531-85.335938 85.332031-85.335938s85.332031 38.273438 85.332031 85.335938c0 47.058593-38.269531 85.332031-85.332031 85.332031zm0-138.667969c-29.417969 0-53.332031 23.9375-53.332031 53.335938 0 29.394531 23.914062 53.332031 53.332031 53.332031s53.332031-23.9375 53.332031-53.332031c0-29.398438-23.914062-53.335938-53.332031-53.335938zm0 0"/><path  d="m154.667969 256c0 38.292969-31.042969 69.332031-69.335938 69.332031-38.289062 0-69.332031-31.039062-69.332031-69.332031s31.042969-69.332031 69.332031-69.332031c38.292969 0 69.335938 31.039062 69.335938 69.332031zm0 0"/><path  d="m85.332031 341.332031c-47.058593 0-85.332031-38.269531-85.332031-85.332031s38.273438-85.332031 85.332031-85.332031c47.0625 0 85.335938 38.269531 85.335938 85.332031s-38.273438 85.332031-85.335938 85.332031zm0-138.664062c-29.417969 0-53.332031 23.933593-53.332031 53.332031s23.914062 53.332031 53.332031 53.332031c29.421875 0 53.335938-23.933593 53.335938-53.332031s-23.914063-53.332031-53.335938-53.332031zm0 0"/><path  d="m135.703125 245.761719c-7.425781 0-14.636719-3.863281-18.5625-10.773438-5.824219-10.21875-2.238281-23.253906 7.980469-29.101562l197.949218-112.851563c10.21875-5.867187 23.253907-2.28125 29.101563 7.976563 5.824219 10.21875 2.238281 23.253906-7.980469 29.101562l-197.953125 112.851563c-3.328125 1.898437-6.953125 2.796875-10.535156 2.796875zm0 0"/><path  d="m333.632812 421.761719c-3.585937 0-7.210937-.898438-10.539062-2.796875l-197.953125-112.851563c-10.21875-5.824219-13.800781-18.859375-7.976563-29.101562 5.800782-10.238281 18.855469-13.84375 29.097657-7.976563l197.953125 112.851563c10.21875 5.824219 13.800781 18.859375 7.976562 29.101562-3.945312 6.910157-11.15625 10.773438-18.558594 10.773438zm0 0"/></svg>
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                          {% if event.address %}
+                                                <div class="card-adherent__address">
+                                                    {{ event.address }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="card-adherent__logo">
+                                                <img src="{{ asset(event.logo) }}" alt="Logo"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="adherent-scroller">
+                                        {# TODO: ICONE FLECHE DE BAS #}
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div> <!-- END SWIPER -->
+
+                <!-- If we need pagination -->
+                <!-- <div style="color:#FFFFFF" class="swiper-pagination"></div> -->
+
+                <!-- If we need navigation buttons -->
+
+                <div class="swiper-button-prev cards-swiper-prev"></div>
+                <div class="swiper-button-next cards-swiper-next"></div>
+
+            </div>
+
+        </div>
+    </div>
+    {# <h1>Evenements</h1>
+
+    <table class="table">
+        
+        <tbody>
+        {% for event in events %}
+           <tr>
+                <td class="adherentstd">
+                    <div><a href="{{ path('event_show', {'id': event.id}) }}"><img class="bqimage" src=" /images/{{ asset( event.media ) }}"></a></div>
+                    <div><a href="{{ path('event_show', {'id': event.id}) }}">{{ event.title }} </a> <br>Societe : {{ event.adherent }} <br> Date : {{ event.date ? event.date|date('Y-m-d H:i:s') : '' }} <br> {{ event.description }} <br>
+                    <a href="https://{{ event.socialmeida }}">{{ event.socialmeida }} </a></div> 
+                </td>
+               
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+{% endblock %}

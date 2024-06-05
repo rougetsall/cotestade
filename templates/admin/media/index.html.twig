@@ -1,0 +1,48 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Media{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Medias</h1>
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin') }}" class="btn btn-sm btn-outline-primary">Retour</a>
+        </div>
+        {% else %}
+         <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('media_new') }}" class="btn btn-sm btn-outline-primary">Ajouter un Media</a>
+        </div>
+         {% endif %}
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Legend</th>
+                <th>Files</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medium in media %}
+            <tr>
+                <td>{{ medium.id }}</td>
+                <td>{{ medium.title }}</td>
+                <td>{{ medium.legend }}</td>
+                <td>{{ medium.files }}</td>
+                <td>
+                    <a href="{{ path('media_show', {'id': medium.id}) }}">voir</a>
+                    <a href="{{ path('media_edit', {'id': medium.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

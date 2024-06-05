@@ -1,0 +1,37 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Catégories Company{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Catégories</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin_type_company_new') }}" class="btn btn-sm btn-outline-primary">Ajouter une catégorie Company</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Catégorie</th>
+                <th>Édition</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_company in type_companies %}
+            <tr>
+                <td>{{ type_company.id }}</td>
+                <td>{{ type_company.name }}</td>
+                <td>
+                    <a href="{{ path('admin_type_company_edit', {'id': type_company.id}) }}">Éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune catégorie</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

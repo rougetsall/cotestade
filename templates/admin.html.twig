@@ -1,0 +1,124 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - Administration COTE STADE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/admin/dashboard.css') }}" rel="stylesheet" type="text/css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="{{ path('admin') }}">Côté Stade</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="ml-2 form-control form-control-dark w-100" type="text" placeholder="Rechercher" aria-label="Rechercher">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+
+            <a class="btn-exit-panel" href="{{ path('home') }}">Retour au site</a>
+
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'admin' %}active{% endif %}"
+                           href="{{ path('admin') }}">Administration</a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_user' %}active{% endif %}"
+                               href="{{ path('admin_user') }}">Utilisateurs</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Gestion</span>
+                </h6>
+
+                <ul class="nav flex-column mb-2">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_adherent' %}active{% endif %}"
+                               href="{{ path('admin_adherent') }}">Adhérents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_event' %}active{% endif %}"
+                               href="{{ path('admin_event') }}">Événements</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_privatisation' %}active{% endif %}"
+                               href="{{ path('admin_privatisation') }}">Privatisations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_privatisation' %}active{% endif %}"
+                               href="{{ path('admin_recrutement') }}">Recrutements</a>
+                        </li>
+                        
+                        
+                        
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_adherent_login' %}active{% endif %}"
+                               href="{{ path('admin_adherent_login') }}">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_event_me' %}active{% endif %}"
+                               href="{{ path('admin_event_me') }}">Évènements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_privatisation_me' %}active{% endif %}"
+                               href="{{ path('admin_privatisation_me') }}">Privatisations</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_privatisation_me' %}active{% endif %}"
+                               href="{{ path('admin_recrutement_me') }}">Recrutements</a>
+                        </li>
+                        
+                    {% endif %}
+                      <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_media' %}active{% endif %}" href="{{ path('admin_media') }}">Media</a>
+                        </li>
+                    </ul>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Configurateur</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_categories' %}active{% endif %}"
+                               href="{{ path('admin_categories') }}">Types d'événements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'admin_type_company' %}active{% endif %}"
+                               href="{{ path('admin_type_company') }}">Catégories d'adhérents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'contact_admin' %}active{% endif %}"
+                               href="{{ path('contact_admin') }}">Messagerie</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            {% block body %}{% endblock %}
+        </main>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/admin/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
+
+</body>
+</html>

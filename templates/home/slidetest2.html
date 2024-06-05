@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide/dist/css/splide.min.css">
+    <title>Slider de Magasins</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #ededed;
+        }
+        
+        .container-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .container-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            padding: 40px 0;
+        }
+        
+        .title-page {
+            flex: 1;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .arrow {
+            position: absolute;
+            left: 10%;
+            font-size: 20px;
+        }
+        
+        #slider {
+            width: 90%;
+            margin: auto;
+        }
+        
+        .splide__slide {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            border-radius: 25px;
+            padding: 20px;
+            width: 80%;
+            text-align: center;
+        }
+        
+        .card img {
+            border-radius: 25px 25px 0 0;
+            width: 100%;
+        }
+        
+        .photo-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            margin-top: 10px;
+        }
+        
+        .photo-button img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+
+        .event-details {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .event-details div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .event-details img {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 5px;
+        }
+
+        .event-details span {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-page">
+        <div class="container-title">
+            <h1 class="title-page">Slider de Magasins</h1>
+            <a id="retour" href="/">
+                <span class="arrow">&lt;</span>
+            </a>
+        </div>
+        <div id="slider" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <div class="card">
+                            <img src="path/to/your/image1.jpg" alt="Image Magasin 1">
+                            <h2 class="subtitle-photo">Nom du Magasin 1</h2>
+                            <a href="tel:+1234567890" class="photo-button">
+                                <img src="path/to/phone/icon.svg" alt="Icône Téléphone">
+                                <span>Appeler</span>
+                            </a>
+                            <a href="http://www.google.com/maps" class="photo-button">
+                                <img src="path/to/map/icon.svg" alt="Icône Carte">
+                                <span>S'y rendre</span>
+                            </a>
+                            <a href="https://magasin1.com" class="photo-button" target="_blank">
+                                <img src="path/to/web/icon.svg" alt="Icône Site Web">
+                                <span>Site web</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="splide__slide">
+                        <div class="card">
+                            <img src="path/to/dj-snake.jpg" alt="Concert DJ Snake">
+                            <h2 class="subtitle-photo">Concert DJ Snake - 10 mai 2025</h2>
+                            <div class="event-details">
+                                <div>
+                                    <img src="path/to/calendar/icon.svg" alt="Icône Calendrier">
+                                    <span>10.05.2025</span>
+                                </div>
+                                <div>
+                                    <img src="path/to/location/icon.svg" alt="Icône Localisation">
+                                    <span>Stade de France</span>
+                                </div>
+                                <div>
+                                    <img src="path/to/person/icon.svg" alt="Icône Personne">
+                                    <span>Stade de France</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Ajouter plus de diapositives ici -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/@splidejs/splide/dist/js/splide.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#slider', {
+                type: 'loop',
+                perPage: 1,
+                focus: 'center',
+                autoplay: true,
+                interval: 3000,
+                arrows: true,
+                pagination: true,
+                padding: '5%', // Pour montrer une partie de la diapositive suivante/précédente
+            }).mount();
+        });
+    </script>
+</body>
+</html>

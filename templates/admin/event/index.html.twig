@@ -1,0 +1,52 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Evenements</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin_event_new') }}" class="btn btn-sm btn-outline-primary">Ajouter un Evenement</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Conserne</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Social meida</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.id }}</td>
+                 <td>{{ event.title }}</td>
+                  <td>{{ event.adherent }}</td>
+                <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.socialmeida }}</td>
+                {% if event.status == true %}
+                <td>Valide</td>
+                {% else %}
+                <td>InValide</td>
+                {% endif %}
+                <td>
+                 <a href="{{ path('admin_event_show', {'id': event.id}) }}">Voir</a>
+                 <a href="{{ path('admin_event_edit', {'id': event.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

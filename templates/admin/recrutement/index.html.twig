@@ -1,0 +1,49 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Recrutement{% endblock %}
+
+{% block body %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Recrutements</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin_recrutement_new') }}" class="btn btn-sm btn-outline-primary">Ajouter un Recrutement</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Conserne</th>
+                <th>Annonce</th>
+                <th>lien</th>
+                <th>cootrdonne</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recrutement in recrutements %}
+            <tr>
+                <td>{{ recrutement.id }}</td>
+                <td>{{ recrutement.titre }}</td>
+                <td>{{ recrutement.user }}</td>
+                <td>{{ recrutement.lien }}</td>
+                <td>{{ recrutement.contact }}</td>
+                <td>{{ recrutement.annonce }}</td>
+                <td>{{ recrutement.date ? recrutement.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_recrutement_show', {'id': recrutement.id}) }}">show</a>
+                    <a href="{{ path('admin_recrutement_edit', {'id': recrutement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,53 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.email) }}
+    </div>
+      <div class="form-group">
+        {{ form_row(form.address) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.town) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.zipcode) }}
+    </div>
+   
+    <div class="form-group">
+        {{ form_row(form.file) }}
+    </div>
+     <div class="form-group">
+        {{ form_row(form.fileback) }}
+    </div>
+     <div class="form-group">
+        {{ form_row(form.filemobile) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_row(form.tel) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.url) }}
+    </div>
+     <div class="form-group">
+        {{ form_row(form.presentation) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.description) }}
+    </div>
+
+     <div class="form-group">
+        {{ form_row(form.typeCompany) }}
+    </div>
+       <div class="form-group">
+        {{ form_row(form.username) }}
+    </div>
+       <div class="form-group">
+        {{ form_row(form.passworduser) }}
+    </div>
+    
+    <button class="btn btn-sm btn-outline-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

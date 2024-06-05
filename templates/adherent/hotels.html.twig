@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hôtels{% endblock %}
+
+{% block body %}
+    <div class="page page-commerces">
+        <section class="about-us pb-4">
+            <div class="container">
+                <h2 class="about-us-title">Les hôtels Côté Stade</h2>
+                <p class="about-us-text">
+                    Une offre d'hébergements adapté à vos voyages d'affaires ou de loisirs, située à 10 minutes du centre de Paris et 15 minutes de l'aéroport Charles de Gaule.
+                <p>
+            </div>
+        </section>
+        <section class="commerces">
+            <div class="container">
+                <div class="row mb-4">
+                    {% for hotel in hotels %}
+                        <div class="col-md-4 mb-4">
+                            <div class="shop-card">
+                                <a href="{{ path('adherent_show', {'id': hotel.id}) }}" class="shop-card__thumbnail">
+                                    <img src="{{ asset( 'images/' ~ hotel.background ) }}" alt="Logo"/>
+                                </a>
+                                <div class="shop-card__content">
+                                    <div class="shop-card__content-header">
+                                        <h3 class="shop-card__title">{{ hotel.name }}</h3>
+                                        <div class="shop-card__address">{{ hotel.address }}</div>
+                                    </div>
+                                    <div class="shop-card__content-main">
+                                        <div class="shop-card__description">
+                                            {{ hotel.description|slice(0, 100) }}
+                                            <a href="{{ path('adherent_show', {'id': hotel.id}) }}">[...]</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

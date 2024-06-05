@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprises{% endblock %}
+
+{% block body %}
+    <div class="page page-companies">
+        <section class="about-us pb-4">
+            <div class="container">
+                <h2 class="about-us-title">Les services Côté Stade</h2>
+                <p class="about-us-text">
+                    Des services pour toute la famille, des plus petits au plus grands, avec un grand choix d'activités : concerts, évènements, sport, cinéma, loisir, visites...
+
+                <p>
+            </div>
+        </section>
+        <section class="commerces">
+            <div class="container">
+                <div class="row mb-4">
+                    {% for company in companies %}
+                        <div class="col-md-4 mb-4">
+                            <div class="shop-card">
+                                <a href="{{ path('adherent_show', {'id': company.id}) }}" class="shop-card__thumbnail">
+                                    <img src="{{ asset( 'images/' ~ company.background ) }}" alt="Logo"/>
+                                </a>
+                                <div class="shop-card__content">
+                                    <div class="shop-card__content-header">
+                                        <h3 class="shop-card__title">{{ company.name }}</h3>
+                                        <div class="shop-card__address">{{ company.address }}</div>
+                                    </div>
+                                    <div class="shop-card__content-main">
+                                        <div class="shop-card__description">
+                                            {{ company.description|slice(0, 100) }}
+                                            <a href="{{ path('adherent_show', {'id': company.id}) }}">[...]</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Adhérent{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Adhérents</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ path('admin_adherent_new') }}" class="btn btn-sm btn-outline-dark">Nouvel adhérent</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Tél.</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Site Web</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adherent in adherents %}
+            <tr>
+                <td>{{ adherent.name }}</td>
+                <td>{{ adherent.tel }}</td>
+                <td>{{ adherent.email }}</td>
+                <td>{{ adherent.address }} {{ adherent.town }} {{ adherent.zipcode }}</td>
+                <td><a href="{{ adherent.url}}">{{ adherent.url }}</a></td>
+                <td>{{ adherent.description|slice(0, 50) ~ ' [...]' }}</td>
+                <td>
+                    <a href="{{ path('admin_adherent_show', {'id': adherent.id}) }}">Afficher</a>
+                    <a href="{{ path('admin_adherent_edit', {'id': adherent.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

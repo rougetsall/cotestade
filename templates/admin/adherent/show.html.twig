@@ -1,0 +1,55 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Adherent{% endblock %}
+
+{% block body %}
+    
+ <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1>Adhérent</h1>
+        <div class="btn-toolbar align-items-center mb-2 mb-md-0">
+            <a class="btn btn-sm btn-outline-dark" href="{{ path('admin_adherent') }}">Retour</a>
+            <a href="{{ path('admin_adherent_edit', {'id': adherent.id}) }}" class="btn btn-sm btn-outline-dark ml-1">Éditer</a>
+            {{ include('admin/adherent/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adherent.name }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ adherent.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ adherent.email }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ adherent.address }} {{ adherent.town }} {{ adherent.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>logo</th>
+                <td><img class="bqimage" src=" /images/{{ asset( adherent.logo ) }}"></td>
+            </tr>
+            <tr>
+                <th>image de fond</th>
+                <td><img class="bqimage" src=" /images/{{ asset( adherent.background ) }}"></td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td> <a href="{{ adherent.url}}">{{ adherent.url }}</a></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ adherent.description }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ adherent.username }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

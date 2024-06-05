@@ -1,0 +1,352 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class="page-home">
+
+        <section class="hero">
+            <div class="hero-video">
+                <video autoplay muted loop>
+                    <source src="{{ asset('videos/cotestadenew.mp4') }}" type="video/mp4"/>
+                </video>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Côté Stade</h1>
+                <p class="hero-subtitle ">Vos commerces au pied du Stade de France</p>
+                <a href="#" class="btn btn-white hero-button">Je découvre mon quartier</a>
+            </div>
+        </section>
+
+        <section class="about-us">
+            <div class="container">
+                <h2 class="about-us-title">
+                Bienvenue chez Côté Stade, l'association des commerces, restaurants, hôtels et services du quartier du Stade de France</h2>
+                <p class="about-us-text">
+                    Suivre Côté Stade, c'est la garantie d'avoir les infos pratiques, les bons plans,
+                     les actualités de toutes les enseignes au même endroit.
+                     <br>
+                     Gagnez du temps et préparez votre journée shopping, 
+                     votre Week end loisir, ou votre déjeuner d'affaires en quelques minutes.
+                <p>
+                <p class="about-us-text font-weight-bold">Tous les membres Côté Stade restent ouverts durant les évènements du Stade</p>         
+                    <div class="d-flex justify-content-center mt-4" style='flex-wrap: wrap;'>
+                    <a href="{{ path('shops') }}" class="btn btn-black mr-3" style='margin-bottom:15px;'>Commerces</a>
+                    <a href="{{ path('restaurants') }}" class="btn btn-black mr-3" style='margin-bottom:15px;'>Restaurants</a>
+                    <a href="{{ path('hotels') }}" class="btn btn-black mr-3" style='margin-bottom:15px;'>Hôtels</a>
+                    <a href="{{ path('companies') }}" class="btn btn-black mr-3" style='margin-bottom:15px;'>Services</a>
+                    <a class="btn btn-black mr-3" href="{{ path('events_to_come') }}" style='margin-bottom:15px;'>Actualités</a>
+                    <a class="btn btn-black mr-3" href="{{ path('privatisation') }}" style='margin-bottom:15px;'>Privatisation</a>
+                    <a class="btn btn-black mr-3" href="{{ path('recrutement') }}" style='margin-bottom:15px;'>Recrutement</a>
+               
+                </div>
+            </div>
+        </section>
+
+        <section class="adherents-bar">
+            <div class="container">
+                <div class="adherents-bar__adherent">
+                    {% for restaurant in allRestaurants %}
+                        <div><a href="{{ path('adherent_show', {'id': restaurant.id}) }}">{{ restaurant.name }}</a> -</div>
+                    {% endfor %}
+                    {% for restaurant in allRestaurants %}
+                        <div><a href="{{ path('adherent_show', {'id': restaurant.id}) }}">{{ restaurant.name }}</a> -</div>
+                    {% endfor %}
+                </div>
+                <div class="adherents-bar__adherent">
+                    {% for shop in allShops %}
+                        <div><a href="{{ path('adherent_show', {'id': shop.id}) }}">{{ shop.name }}</a> -</div>
+                    {% endfor %}
+                    {% for shop in allShops %}
+                        <div><a href="{{ path('adherent_show', {'id': shop.id}) }}">{{ shop.name }}</a> -</div>
+                    {% endfor %}
+                </div>
+                <div class="adherents-bar__adherent">
+                    {% for company in allCompanies %}
+                        <div><a href="{{ path('adherent_show', {'id': company.id}) }}">{{ company.name }}</a> -</div>
+                    {% endfor %}
+                    {% for company in allCompanies %}
+                        <div><a href="{{ path('adherent_show', {'id': company.id}) }}">{{ company.name }}</a> -</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="home-events py-5">
+            <div class="container">
+                <header class="home-events__header mt-4">
+                    <h2 class="section-title">Prochains Actualités</h2>
+                    {# <p class="home-events__intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus #}
+                    {# accusantium adipisci alias aliquid amet asperiores doloribus illum laboriosam maxime nihil #}
+                    {# obcaecati, perspiciatis quibusdam quisquam sequi sunt tempore ullam velit. Cum!</p> #}
+                </header>
+                <div class="home-events__events">
+                    <div class="row">
+                        {% for event in events %}
+                            <div class="col-md-4 mb-4">
+                                <a href="{{ path('event_show', {'id': event.id}) }}" class="event-card">
+                                    <div class="event-card__bg">
+                                        <img src="{{ asset( 'images/' ~ event.media ) }}" alt="Logo"/>
+                                    </div>
+                                    <div class="event-card__overlay"></div>
+                                    <div class="event-card__content">
+                                        <div class="event-card__title">
+                                            {{ event.title }}
+                                        </div>
+                                        <div class="event-card__date">
+                                            {{ event.date|date("m/d/Y") }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ path('events_to_come') }}" class="btn btn-black">Tous les Actualités à venir</a>
+            </div>
+        </section>
+
+        <section class="home-shops py-5">
+            <div class="container">
+                <header class="home-events__header mt-4">
+                    <h2 class="section-title">Les commerces Côté Stade</h2>
+                </header>
+                <div class="home-events__events">
+                <div class="row">
+                    {% for shop in shops %}
+                        <div class="col-md-4 mb-4">
+                            <div class="shop-card">
+                                <a href="{{ path('adherent_show', {'id': shop.id}) }}" class="shop-card__thumbnail">
+                                    <img src="{{ asset( 'images/' ~ shop.background ) }}" alt="Logo"/>
+                                </a>
+                                <div class="shop-card__content">
+                                    <div class="shop-card__content-header">
+                                        <h3 class="shop-card__title">{{ shop.name }}</h3>
+                                        <div class="shop-card__address">{{ shop.address }}</div>
+                                    </div>
+                                    <div class="shop-card__content-main">
+                                        <div class="shop-card__description">
+                                            {{ shop.description|slice(0, 100) }}
+                                            <a href="{{ path('adherent_show', {'id': shop.id}) }}">[...]</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+                
+                    <a href="{{ path('shops') }}" class="btn btn-black">Tous les commerces</a>
+                
+            </div>
+        </section>
+
+        <section class="home-events py-5">
+            <div class="container">
+                <header class="home-events__header mt-4">
+                    <h2 class="section-title">Les restaurants Côté Stade</h2>
+                </header>
+                <div class="home-events__events">
+                    <div class="row">
+                        {% for restaurant in restaurants %}
+                            <div class="col-md-4 mb-4">
+                                <div class="shop-card">
+                                    <a href="{{ path('adherent_show', {'id': restaurant.id}) }}"
+                                       class="shop-card__thumbnail">
+                                        <img src="{{ asset( 'images/' ~ restaurant.background) }}" alt="Logo"/>
+                                    </a>
+                                    <div class="shop-card__content">
+                                        <div class="shop-card__content-header">
+                                            <h3 class="shop-card__title">{{ restaurant.name }}</h3>
+                                            <div class="shop-card__address">{{ restaurant.address }}</div>
+                                        </div>
+                                        <div class="shop-card__content-main">
+                                            <div class="shop-card__description">
+                                                {{ restaurant.description|slice(0, 100) }}
+                                                <a href="{{ path('adherent_show', {'id': restaurant.id}) }}">[...]</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ path('restaurants') }}" class="btn btn-black">Tous les restaurants</a>
+            </div>
+        </section>
+
+        <section class="home-shops py-5">
+            <div class="container">
+                <header class="home-events__header mt-4">
+                    <h2 class="section-title">Les Hôtels Côté Stade</h2>
+                  
+                </header>
+                <div class="home-events__events">
+                <div class="row">
+                    {% for hotel in hotels %}
+                        <div class="col-md-4 mb-4">
+                            <div class="shop-card">
+                                <a href="{{ path('adherent_show', {'id': hotel.id}) }}" class="shop-card__thumbnail">
+                                    <img src="{{ asset( 'images/' ~ hotel.background ) }}" alt="Logo"/>
+                                </a>
+                                <div class="shop-card__content">
+                                    <div class="shop-card__content-header">
+                                        <h3 class="shop-card__title">{{ hotel.name }}</h3>
+                                        <div class="shop-card__address">{{ hotel.address }}</div>
+                                    </div>
+                                    <div class="shop-card__content-main">
+                                        <div class="shop-card__description">
+                                            {{ hotel.description|slice(0, 100) }}
+                                            <a href="{{ path('adherent_show', {'id': hotel.id}) }}">[...]</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+                    <a href="{{ path('hotels') }}" class="btn btn-black">Tous les hôtels</a>
+                
+            </div>
+        </section>
+
+
+        <section class="home-events py-5">
+            <div class="container">
+                <header class="home-events__header mt-4">
+                    <h2 class="section-title">Les Services Côté Stade</h2>
+                </header>
+                <div class="home-events__events">
+                    <div class="row">
+                        {% for service in services %}
+                            <div class="col-md-4 mb-4">
+                                <div class="shop-card">
+                                    <a href="{{ path('adherent_show', {'id': service.id}) }}"
+                                       class="shop-card__thumbnail">
+                                        <img src="{{ asset( 'images/' ~ service.background) }}" alt="Logo"/>
+                                    </a>
+                                    <div class="shop-card__content">
+                                        <div class="shop-card__content-header">
+                                            <h3 class="shop-card__title">{{ service.name }}</h3>
+                                            <div class="shop-card__address">{{ service.address }}</div>
+                                        </div>
+                                        <div class="shop-card__content-main">
+                                            <div class="shop-card__description">
+                                                {{ service.description|slice(0, 100) }}
+                                                <a href="{{ path('adherent_show', {'id': service.id}) }}">[...]</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ path('companies') }}" class="btn btn-black">Tous les Services</a>
+            </div>
+        </section>
+{# <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5243.382308563638!2d2.357628276971623!3d48.921276217055755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66ebadd2263bf%3A0x70c04f7109156311!2sStade%20de%20France!5e0!3m2!1sfr!2sfr!4v1665401578073!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> #}
+
+<div id="map" style="height: 600px;"></div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+{# <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHS9PEOsSzuKO-sNL86DoR43vFvsAVoTA&sensor=false" type="text/javascript"></script> #}
+
+<script>
+        function initMap() {
+            var addresses = {{ addresses | json_encode | raw }};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: {lat: 48.924242, lng: 2.360393 }
+            });
+
+            addresses.forEach(function(address) {
+                console.log(address.name)
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'address': address.address }, function(results, status) {
+                           if (status == 'OK') {
+                            var newMarker = new google.maps.Marker({
+                                map: map,
+                                position: results[0].geometry.location,
+                                
+                            });
+                        
+                            newMarker['infowindow'] = new google.maps.InfoWindow({
+                                content: '<h6>' + address.name + '</h6><p>' + address.presentation + '</p><a href="https://cotestade.fr/adherent/'+ address.link + '">Voir plus</a>'
+                            });
+
+                            google.maps.event.addListener(newMarker, 'mouseover', function() {
+                                this['infowindow'].open(map, this);
+                            });
+                            google.maps.event.addListener(newMarker, 'mouseout', function() {
+                                var that = this;
+                                setTimeout(function() {
+                                    that['infowindow'].close();
+                                }, 2200); // Fermer après 2 secondes (2000 ms)
+                               
+                            });
+                            console.log(newMarker)
+                            
+                        } else {
+                        console.error('Geocode was not successful for the following reason: ' + status);
+                      }
+                });
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap" async defer></script>
+
+{# <script>
+        var map = L.map('map').setView([51.505, -0.09], 13); // Centrage de la carte sur une position initiale
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Requête AJAX pour récupérer les adresses depuis Symfony
+        fetch('/addresses')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(address => {
+                    console.log(address.address+' '+address.name)
+                    // Requête AJAX pour géocoder l'adresse et obtenir les coordonnées géographiques
+                    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + address.address)
+                        .then(response => response.json())
+                        .then(geocodedData => {
+                            if (geocodedData.length > 0) {
+                                var lat = geocodedData[0].lat;
+                                var lon = geocodedData[0].lon;
+                                L.marker([lat, lon]).addTo(map)
+                                    .bindPopup(address.name); // Vous pouvez personnaliser le contenu du popup ici
+                            }
+                        });
+                });
+            });
+    </script>
+<script> #}
+   
+
+
+ {# const encoded = encodeURI('http://api.positionstack.com/v1/forward?access_key=a6b150528b867e94f40008dede82b9c0&query=18 Rue Francis de Pressensé, 93210 Saint-Denis france');
+fetch(encoded)
+  .then(response => response.json())
+  .then(data => {
+    let lon =data.data[0].longitude
+    let lat =data.data[0].latitude
+    console.log(lat)
+      addMarker(lat,lon,'',datas[i].title);
+  }); #}
+</script>
+
+{% endblock %}
+
+
