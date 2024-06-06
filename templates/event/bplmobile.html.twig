@@ -15,7 +15,11 @@
             <div class="container-title">
                 <h1 class="title-page">{{ titrecom }}</h1>
                 <a id="retour" href="{{ path('home') }}">
-                <span class="arrow">&lt;</span>
+                <span class="arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 17L10 12L15 7" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
                 </a>
             </div>
     
@@ -27,8 +31,8 @@
                             {% for shop in shops %}
                              <li class="splide__slide">
                                     <div id="card-2" class="card">
-                                        <div>
-                                        <a href="{{ path('adherent_show', {'id': shop.id}) }}" class="shop-card__thumbnail">
+                                        <div class="img-card-container">
+                                            <a href="{{ path('adherent_show', {'id': shop.adherent.id}) }}" class="shop-card__thumbnail">
                                                 
                                                 <img  class="image-css" src="{{ asset( 'images/' ~  shop.media ) }}" alt="Logo"/>
                                                
@@ -38,17 +42,13 @@
                                         <div class="container-info">
                                             <h2 class="subtitle-photo">{{ shop.title }}</h2>
                                             <div class="bottom-photo">
-                                               
-                                               <p class="subtitle-description">{{ shop.description|raw }}</p>
-                                                
-                                               
+                                            <p class="subtitle-description">{{ shop.description|raw }}</p> 
                                             </div>
                                         </div>
                                        
                                     </div>
                                      {# <div id="card-3" class="card">
-                                        git add .
-
+                                        
                                             <button class="main-button"> <a href="{{ shop.adherent.url }}"  >J’y vais !</a></button>
                                         
 
@@ -76,11 +76,11 @@
                     <a href="{{ path('events_to_bonplan') }}" class="nav-button">
                         
                         <img src="{{ asset( 'icons/bons-plans.svg' ) }}">
-                        <span style="color: #999;">Bons plans</span>
+                        <span >Bons plans</span>
                     </a>
                     <a href="{{ path('events_to_come') }}" class="nav-button">
                         <img src="{{ asset( 'icons/calendar.svg' ) }}">
-                        <span >Événements</span>
+                        <span style="color: #999;" >Événements</span>
                     </a>
                 </nav>
             </div>
@@ -107,10 +107,12 @@
        .subtitle-description{
             text-align: center;
             padding: 0px 5px ;
-            margin-top: 10px;
+            margin: 15px 10px;
+            font-size: 13px;
         }
         .subtitle-photo{
             margin: auto;
+            font-weight: normal;
         }
 
         .container-page{
@@ -142,9 +144,17 @@
             display: flex;
             flex-direction: column;
             justify-content: end;
-            height: 100%;
+            height: 406px ;
             width: 80vw;
-            padding: 10px; /* Ajout de padding */
+            padding: 20px; /* Ajout de padding */
+             
+        }
+
+        .card-icons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
         }
         
         .title-text{
@@ -182,6 +192,7 @@
 
         .bottom-photo {
             display: flex;
+            flex-direction:column;
             justify-content: space-between;
             align-items: flex-start;
             color: black;
@@ -220,10 +231,16 @@
             text-align: center;
         }
 
+        .img-card-container{
+            height: 100%;
+        }
+
         .image-css{
             margin: auto;
             display: flex;
             width: 100%;
+            height: 100%;
+            border-radius: 20px 20px 0px 0px;
         }
         
         a{
@@ -244,11 +261,12 @@
             flex: 1;
             text-align: center;
             font-size: 7vw;
+            font-weight: normal;
         }
         
         .arrow {
             position: absolute;
-            left: 10%; /* Ajustez la valeur pour positionner le span à droite */
+            left: 5%; /* Ajustez la valeur pour positionner le span à droite */
         }
 
         /* Custom CSS for Splide */
@@ -287,6 +305,8 @@
         }
         .resa-button {
             flex: 1;
+            width: 150px;
+            height: 40px;
             padding: 10px 40px;
             text-align: center;
             background-color: #b3a0ff7f;
@@ -296,6 +316,10 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 4vw;
+        }
+
+        .resa-button a{
+            color: black;
         }
 
         .container-nav {

@@ -15,23 +15,22 @@
             <div class="container-title">
                 <h1 class="title-page">{{ titrecom }}</h1>
                 <a id="retour" href="{{ path('home') }}">
-                <span class="arrow">&lt;</span>
+                <span class="arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 17L10 12L15 7" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
                 </a>
             </div>
-    
             <div id="slider" class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
-                       
-                       
                             {% for shop in shops %}
-                             <li class="splide__slide">
+                             <li class="splide__slide" data-url="{{ shop.adherent.url }}">
                                     <div id="card-2" class="card">
-                                        <div>
-                                        <a href="{{ path('adherent_show', {'id': shop.id}) }}" class="shop-card__thumbnail">
-                                                
-                                                <img  class="image-css" src="{{ asset( 'images/' ~  shop.media ) }}" alt="Logo"/>
-                                               
+                                        <div class="img-card-container">
+                                            <a href="{{ path('adherent_show', {'id': shop.adherent.id}) }}" class="shop-card__thumbnail">  
+                                                    <img  class="image-css" src="{{ asset( 'images/' ~  shop.media ) }}" alt="Logo"/>
                                             </a>
                                             {# <img class="image-css" src="image/background.png" alt=""> #}
                                         </div>
@@ -40,7 +39,7 @@
                                             <div class="bottom-photo">
                                                <a href="#" class="photo-button">
                                                    <img src="{{ asset( 'icons/calendar-07.svg' ) }}" style="margin-top: 2px;">
-                                                    <span> {{ shop.date|date('m/d/Y') }}<br>   </span>
+                                                    <span> {{ shop.date| date('m/d/Y') }}<br>   </span>
                                                 </a>
                                                 <a href="http://www.google.com/maps?q={{ shop.address  }}" class="photo-button">
                                                     <img src="{{ asset( 'icons/ping.svg' ) }}">
@@ -55,12 +54,7 @@
                                         </div>
                                        
                                     </div>
-                                     <div id="card-3" class="card">
-                                        
-                                            <button class="main-button"> <a href="{{ shop.adherent.url }}"  >Réserver</a></button>
-                                        
-
-                                        </div>
+                                 
                                 </li>
                             {% endfor %}
                         
@@ -69,9 +63,9 @@
             </div>
 
             <div class="content-buttons">
-                <div class="center-buttons-resa">
-                    <button class="resa-button">Réserver</button>
-                </div>
+                 <div class="center-buttons-resa">
+        <button class="resa-button"><a href="#" id="reserve-button">Réserver</a></button>
+    </div>
             </div>
             
             
@@ -98,6 +92,41 @@
 
 
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //console.log('hello');  // Check if JS is loading
+
+        var splideElement = document.querySelector('.splide');
+        var reserveButton = document.getElementById('reserve-button');
+
+        if (splideElement) {
+            var splide = new Splide(splideElement, {
+                type       : 'loop',
+                perPage    : 1,
+                pagination : false,
+                arrows     : true,
+            }).mount();
+
+            // Function to update the button href
+            function updateReserveButton() {
+                var activeSlide = document.querySelector('.splide__slide.is-active');
+                if (activeSlide) {
+                    var shopUrl = activeSlide.getAttribute('data-url');
+                    reserveButton.setAttribute('href', shopUrl);
+                }
+            }
+
+            // Initial load
+            updateReserveButton();
+
+            // Update the button when the slide changes
+            splide.on('moved', updateReserveButton);
+        }
+    });
+</script>
+
+
 
 
     <style>
@@ -215,20 +244,25 @@
         }
 
         .subtitle-photo{
-            font-size: 5vw;
+            font-size: 16px;
+            font-weight: normal;
             margin: auto;
             display: flex;
             justify-content: center;
-            margin-top: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
+            margin: 10px;
             text-align: center;
+        }
+
+        .img-card-container{
+            height: 100%;
         }
 
         .image-css{
             margin: auto;
             display: flex;
+            border-radius: 20px 20px 0px 0px;
             width: 100%;
+            height: 100%;
         }
         
         a{
@@ -249,11 +283,12 @@
             flex: 1;
             text-align: center;
             font-size: 7vw;
+            font-weight: normal;
         }
         
         .arrow {
             position: absolute;
-            left: 10%; /* Ajustez la valeur pour positionner le span à droite */
+            left: 5%; /* Ajustez la valeur pour positionner le span à droite */
         }
 
         /* Custom CSS for Splide */
@@ -301,6 +336,12 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 4vw;
+            width: 150px;
+            height: 40px;
+        }
+
+        .resa-button a{
+            color:black;
         }
 
         .container-nav {
